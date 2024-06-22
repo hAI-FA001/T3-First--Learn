@@ -1,27 +1,23 @@
-"use client";
-
 import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
-import { UploadButton } from '../../utils/uploadthing';
-import { useRouter } from 'next/navigation';
+import { SimpleUploadButton } from './simple-upload-button';
 
 export function TopNav() {
-    const router = useRouter();
-
-    return (
-      <nav className="flex items-center justify-between w-full p-4 text-xl font-semibold border-b">
-        <div>Gallery</div>
-        <div className='flex flex-row'>
-            <SignedOut>
-                <SignInButton />
-            </SignedOut>
-            <SignedIn>
-                {/* will get type error if it's incorrect, it's taking this from uploadthing core.ts */}
-                <UploadButton endpoint="imageUploader" onClientUploadComplete={() => {
+  return (
+    <nav className="flex items-center justify-between w-full p-4 text-xl font-semibold border-b">
+      <div>Gallery</div>
+      <div className='flex flex-row items-center gap-4'>
+        <SignedOut>
+          <SignInButton />
+        </SignedOut>
+        <SignedIn>
+          {/* will get type error if it's incorrect, it's taking this from uploadthing core.ts */}
+          {/* <UploadButton endpoint="imageUploader" onClientUploadComplete={() => {
                     router.refresh();
-                }} />
-                <UserButton />
-            </SignedIn>
-        </div>
-      </nav>
-    )
-  }
+                }} /> */}
+          <SimpleUploadButton />
+          <UserButton />
+        </SignedIn>
+      </div>
+    </nav>
+  )
+}
