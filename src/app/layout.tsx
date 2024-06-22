@@ -19,13 +19,15 @@ export const metadata = {
 
 export default function RootLayout({
   children,
+  modal,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode,
+  modal: React.ReactNode
 }) {
   return (
     <ClerkProvider>
-    <html lang="en" className={`${GeistSans.variable}`}>
-    <NextSSRPlugin
+      <html lang="en" className={`${GeistSans.variable}`}>
+        <NextSSRPlugin
           /**
            * The `extractRouterConfig` will extract **only** the route configs
            * from the router to prevent additional information from being
@@ -34,11 +36,13 @@ export default function RootLayout({
            */
           routerConfig={extractRouterConfig(ourFileRouter)}
         />
-      <body className="flex flex-col gap-4">
-        <TopNav />
-        {children}
+        <body className="flex flex-col gap-4">
+          <TopNav />
+          {children}
+          {modal}
+          <div id="modal-root"></div>
         </body>
-    </html>
+      </html>
     </ClerkProvider>
   );
 }
