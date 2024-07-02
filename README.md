@@ -1,6 +1,6 @@
 # T3 Gallery
 
-## TODO
+### TODO
 
 - [x] Make it deploy (vercel)
 - [x] Scaffold basic ui w/ mock data
@@ -18,3 +18,9 @@
 - [x] Analytics (w/ posthog)
 - [x] Delete button (w/ Server Actions)
 - [x] Ratelimiting (upstash)
+
+### Extra TODO
+- [ ] Fix the page layout for images of different resolutions
+- [ ] "Selecting" images on the gallery page
+- [ ] "infinite scroll"
+- [ ] Folders/albums
