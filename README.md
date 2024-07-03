@@ -22,6 +22,6 @@
 ### Extra TODO
 
 - [x] Fix the page layout for images of different resolutions
-- [ ] "Selecting" images on the gallery page
+- [x] "Selecting" images on the gallery page
 - [ ] "infinite scroll"
 - [ ] Folders/albums
