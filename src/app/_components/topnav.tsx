@@ -7,7 +7,6 @@ export function TopNav() {
     <nav className="flex items-center justify-between w-full p-4 text-xl font-semibold border-b">
       <div>Gallery</div>
       <div className='flex flex-row items-center gap-4'>
-        <Link href="/album/view" className="bg-blue-950 text-white hover:bg-blue-800 rounded-md p-3 me-5">View Albums</Link>
         <SignedOut>
           <SignInButton />
         </SignedOut>
@@ -16,6 +15,7 @@ export function TopNav() {
           {/* <UploadButton endpoint="imageUploader" onClientUploadComplete={() => {
                     router.refresh();
                 }} /> */}
+          <Link href="/album/view" className="bg-blue-950 text-white hover:bg-blue-800 rounded-md p-3 me-5">View Albums</Link>
           <SimpleUploadButton />
           <UserButton />
         </SignedIn>
