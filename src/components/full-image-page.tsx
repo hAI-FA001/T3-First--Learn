@@ -1,7 +1,7 @@
 import { clerkClient } from "@clerk/nextjs/server";
 import { deleteImage, getImage } from "~/server/queries";
 import { Button } from "./ui/button";
-import { redirect } from "next/navigation";
+
 
 export default async function FullPageImageView(props: { id: number }) {
     const image = await getImage(props.id);
@@ -10,11 +10,11 @@ export default async function FullPageImageView(props: { id: number }) {
 
     return (
         <div className="flex w-full h-full min-w-0">
-            <div className="flex-shrink flex justify-center items-center">
-                <img src={image.url} className="flex-shrink object-contain" />
+            <div className="flex-shrink flex justify-center items-center w-4/5">
+                <img src={image.url} className="object-contain w-full h-full m-auto" alt="Opened Image" />
             </div>
 
-            <div className="flex flex-col flex-shrink-0 w-48 border-l">
+            <div className="flex flex-col flex-shrink-0 border-l w-auto">
                 <div className="border-b p-2 text-center text-lg">{image.name}</div>
 
                 <div className="flex flex-col p-2">

@@ -1,8 +1,6 @@
 import { SignedIn, SignedOut } from "@clerk/nextjs";
-import Image from "next/image";
-import Link from "next/link";
-import { db } from "~/server/db";
-import { getImages as getMyImages } from "~/server/queries";
+import { getImageCount, getImages as getMyImages } from "~/server/queries";
+import ImageContainer from "./_components/image-section";
 
 export const dynamic = "force-dynamic";
 
@@ -20,27 +18,33 @@ export const dynamic = "force-dynamic";
 // }));
 
 async function Images() {
-  const images = await getMyImages();
+  const loadImages = async (skip: number, limit: number) => {
+    "use server";
+
+    return getMyImages(skip, limit);
+  };
+
+  const imageCount = await getImageCount();
+
+  const initialImages = await loadImages(0, 10);
 
   return (
-    <div className="flex flex-wrap justify-center gap-4 p-4">
-      {images.map((image) => (
-        <div key={image.id} className="h-48 w-48 flex flex-col">
-          <Link href={`/img/${image.id}`}>
-            <Image src={image.url} style={{ objectFit: "contain" }} width={192} height={192} alt={image.name} />
-          </Link>
-          <div>{image.name}</div>
-        </div>
-      ))}
-    </div>
-  )
+    <ImageContainer
+      initialImages={initialImages}
+      loadImages={loadImages}
+      imageCount={imageCount}
+      selectedImagesInfo={{ path: "/album/selected", text: "Add to Album" }}
+    />
+  );
 }
 
 export default async function HomePage() {
   return (
     <main className="">
       <SignedOut>
-        <div className="w-full h-full text-2xl text-center">Please sign in above</div>
+        <div className="h-full w-full text-center text-2xl">
+          Please sign in above
+        </div>
       </SignedOut>
       <SignedIn>
         <Images />
