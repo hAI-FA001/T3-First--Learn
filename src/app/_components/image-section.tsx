@@ -2,17 +2,22 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
+import LoadingSpinner from "./loading-spinner";
+
+
+type image = {
+    id: number;
+    name: string;
+    url: string;
+    userId: string;
+    createdAt: Date;
+    updatedAt: Date | null;
+};
 
 const ImageCard = ({ image, isSelected, onSelect }: {
-    image: {
-        id: number;
-        name: string;
-        url: string;
-        userId: string;
-        createdAt: Date;
-        updatedAt: Date | null;
-    },
+    image: image,
     isSelected: boolean,
     onSelect: (imageId: number, isSelected: boolean) => void
 }) => {
@@ -33,14 +38,7 @@ const ImageCard = ({ image, isSelected, onSelect }: {
 }
 
 const ImageSection = ({ images }: {
-    images: {
-        id: number;
-        name: string;
-        url: string;
-        userId: string;
-        createdAt: Date;
-        updatedAt: Date | null;
-    }[]
+    images: image[],
 }) => {
     const [selectedImages, setSelectedImages] = useState<number[]>([]);
 
@@ -66,4 +64,36 @@ const ImageSection = ({ images }: {
     );
 }
 
-export default ImageSection; 
+const ImageContainer = ({ initialImages, loadImages, imageCount }: {
+    initialImages: image[],
+    loadImages: (skip: number, limit: number) => Promise<image[]>,
+    imageCount: number,
+}) => {
+    const [skip, setSkip] = useState<number>(0);
+    const [images, setImages] = useState<image[]>(initialImages);
+    const [ref, inView] = useInView();
+
+
+    async function loadMoreImages() {
+        const nextImages = await loadImages(skip, 10);
+                
+        setImages([...images, ...nextImages]);
+        setSkip(skip + 10);
+    }
+    
+    useEffect(() => {
+        if (inView) {
+            void loadMoreImages();
+        }
+    }, [inView]);
+
+
+    return (
+        <div>
+            <ImageSection images={images} />
+            { imageCount - images.length > 0 && <div className="flex gap-2 justify-center items-center mt-10" ref={ref}> <LoadingSpinner /> Loading...</div>}
+        </div>
+    );
+}
+
+export default ImageContainer; 
