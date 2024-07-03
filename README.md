@@ -20,7 +20,8 @@
 - [x] Ratelimiting (upstash)
 
 ### Extra TODO
-- [ ] Fix the page layout for images of different resolutions
-- [ ] "Selecting" images on the gallery page
-- [ ] "infinite scroll"
-- [ ] Folders/albums
+
+- [x] Fix the page layout for images of different resolutions
+- [x] "Selecting" images on the gallery page
+- [x] "infinite scroll"
+- [x] Folders/albums (good enough)
