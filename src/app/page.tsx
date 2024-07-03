@@ -1,6 +1,6 @@
 import { SignedIn, SignedOut } from "@clerk/nextjs";
-import { getImages as getMyImages } from "~/server/queries";
-import ImageSection from "./_components/image-section";
+import { getImageCount, getImages as getMyImages } from "~/server/queries";
+import ImageContainer from "./_components/image-section";
 
 export const dynamic = "force-dynamic";
 
@@ -18,10 +18,18 @@ export const dynamic = "force-dynamic";
 // }));
 
 async function Images() {
-  const images = await getMyImages();
+  const loadImages = async (skip: number, limit: number) => {
+    "use server";
+
+    return getMyImages(skip, limit);
+  }
+
+  const imageCount = (await getImageCount())[0]?.count ?? 0;
+
+  const initialImages = await loadImages(0, 10);
 
   return (
-    <ImageSection images={images} />
+    <ImageContainer initialImages={initialImages} loadImages={loadImages} imageCount={imageCount} />
   )
 }
 
