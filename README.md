@@ -24,4 +24,4 @@
 - [x] Fix the page layout for images of different resolutions
 - [x] "Selecting" images on the gallery page
 - [x] "infinite scroll"
-- [ ] Folders/albums
+- [x] Folders/albums (good enough)

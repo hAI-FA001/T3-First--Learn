@@ -22,22 +22,29 @@ async function Images() {
     "use server";
 
     return getMyImages(skip, limit);
-  }
+  };
 
-  const imageCount = (await getImageCount())[0]?.count ?? 0;
+  const imageCount = await getImageCount();
 
   const initialImages = await loadImages(0, 10);
 
   return (
-    <ImageContainer initialImages={initialImages} loadImages={loadImages} imageCount={imageCount} />
-  )
+    <ImageContainer
+      initialImages={initialImages}
+      loadImages={loadImages}
+      imageCount={imageCount}
+      selectedImagesInfo={{ path: "/album/selected", text: "Add to Album" }}
+    />
+  );
 }
 
 export default async function HomePage() {
   return (
     <main className="">
       <SignedOut>
-        <div className="w-full h-full text-2xl text-center">Please sign in above</div>
+        <div className="h-full w-full text-center text-2xl">
+          Please sign in above
+        </div>
       </SignedOut>
       <SignedIn>
         <Images />
