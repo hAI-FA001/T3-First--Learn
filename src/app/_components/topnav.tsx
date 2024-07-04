@@ -16,6 +16,7 @@ export function TopNav() {
           {/* <UploadButton endpoint="imageUploader" onClientUploadComplete={() => {
                     router.refresh();
                 }} /> */}
+          <Link href="/album/view" className="bg-blue-950 text-white hover:bg-blue-800 rounded-md p-3 me-5">View Albums</Link>
           <SimpleUploadButton />
           <UserButton />
         </SignedIn>
