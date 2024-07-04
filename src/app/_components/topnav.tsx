@@ -1,7 +1,6 @@
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { SimpleUploadButton } from "./simple-upload-button";
 import ViewAlbumButton from "./view-album-button";
-import Link from "next/link";
 
 export function TopNav() {
   return (
@@ -17,12 +16,6 @@ export function TopNav() {
           {/* <UploadButton endpoint="imageUploader" onClientUploadComplete={() => {
                     router.refresh();
                 }} /> */}
-          <Link
-            href="/album/view"
-            className="me-5 rounded-md bg-blue-950 p-3 text-white hover:bg-blue-800"
-          >
-            View Albums
-          </Link>
           <SimpleUploadButton />
           <UserButton />
         </SignedIn>
