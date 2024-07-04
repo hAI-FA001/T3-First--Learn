@@ -19,10 +19,12 @@ const ImageCard = ({
   image,
   isSelected,
   onSelect,
+  modalPath,
 }: {
   image: image;
   isSelected: boolean;
   onSelect: (imageId: number, isSelected: boolean) => void;
+  modalPath: string;
 }) => {
   return (
     <div className="relative flex h-48 w-48 flex-col">
@@ -35,7 +37,7 @@ const ImageCard = ({
           onSelect(image.id, isSelected);
         }}
       ></button>
-      <Link href={`/img/${image.id}`}>
+      <Link href={`${modalPath}/${image.id}`}>
         <Image
           src={image.url}
           style={{ objectFit: "contain" }}
@@ -57,6 +59,7 @@ export const ImageSection = ({
   selectedImagesInfo: {
     path: string;
     text: string;
+    modalPath: string;
     extraSearchParams?: string;
   };
 }) => {
@@ -103,6 +106,7 @@ export const ImageSection = ({
             key={image.id}
             onSelect={handleSelectImage}
             image={image}
+            modalPath={selectedImagesInfo.modalPath}
             isSelected={
               selectedImages.findIndex((elem) => elem == image.id) != -1
             }
@@ -125,6 +129,7 @@ const ImageContainer = ({
   selectedImagesInfo: {
     path: string;
     text: string;
+    modalPath: string;
     extraSearchParams?: string;
   };
 }) => {

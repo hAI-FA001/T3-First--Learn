@@ -33,7 +33,11 @@ async function Images() {
       initialImages={initialImages}
       loadImages={loadImages}
       imageCount={imageCount}
-      selectedImagesInfo={{ path: "/album/selected", text: "Add to Album" }}
+      selectedImagesInfo={{
+        path: "/album/selected",
+        text: "Add to Album",
+        modalPath: "/img",
+      }}
     />
   );
 }
