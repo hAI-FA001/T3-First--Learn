@@ -90,7 +90,7 @@ export async function addImagesToAlbum(imageIds: number[], albumId: number) {
                 imageId: imageId,
                 albumId: albumId,
                 imageUrl: url,
-            });
+            }).onConflictDoNothing();
   }
 }
 
