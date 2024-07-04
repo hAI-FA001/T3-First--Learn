@@ -1,9 +1,12 @@
-"use client";
+import FullPageAlbumView from "~/components/full-album-page";
 
-import { useRouter } from "next/navigation";
+export default function Page({
+  params: { id: albumId },
+}: {
+  params: { id: string };
+}) {
+  const idAsNumber = Number(albumId);
+  if (Number.isNaN(idAsNumber)) throw new Error("Invalid album id");
 
-export default function Page() {
-  const router = useRouter();
-  router.back();
-  return null;
+  return <FullPageAlbumView id={idAsNumber} />;
 }
